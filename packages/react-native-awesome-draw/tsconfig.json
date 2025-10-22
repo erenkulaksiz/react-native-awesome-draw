@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "display": "tsconfig",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "ES6",
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": false,
+    "allowUnreachableCode": false,
+    "importHelpers": true,
+    "lib": ["DOM", "ESNext"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
