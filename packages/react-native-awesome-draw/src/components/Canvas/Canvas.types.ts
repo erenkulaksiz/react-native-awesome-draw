@@ -7,7 +7,6 @@ export interface CanvasProps {
   distanceThreshold?: number;
   isDrawingEnabled?: boolean;
   isPathOptimized?: boolean;
-  savePath?: (path: PathData) => void;
 
   // Props
   livePathProps?: Omit<PathProps, "animatedProps">;
@@ -20,5 +19,5 @@ export interface CanvasProps {
 
   // Callbacks
   onDrawStart?: () => void;
-  onDrawEnd?: () => void;
+  onDrawEnd?: (path: PathData) => void;
 }

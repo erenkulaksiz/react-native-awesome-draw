@@ -16,7 +16,6 @@ export default function Canvas({
   paths,
   isDrawingEnabled = true,
   isPathOptimized = false,
-  savePath,
   strokeColor = "black",
   strokeWidth = 5,
   livePathProps,
@@ -45,7 +44,7 @@ export default function Canvas({
 
   const savePathCallback = useCallback(() => {
     if (!isPathOptimized) {
-      savePath?.({
+      onDrawEnd?.({
         p: currentPathString.value,
         sc: strokeColor,
         sw: strokeWidth,
@@ -65,14 +64,14 @@ export default function Canvas({
     const simplifiedPoints = simplifyPath(points, tolerance);
     const simplifiedPath = pointsToPath(simplifiedPoints);
 
-    savePath?.({
+    onDrawEnd?.({
       p: simplifiedPath,
       sc: strokeColor,
       sw: strokeWidth,
     });
 
     currentPathString.value = "";
-  }, [strokeColor, strokeWidth, savePath, isPathOptimized]);
+  }, [strokeColor, strokeWidth, onDrawEnd, isPathOptimized]);
 
   const onStartCallback = useCallback(
     (e: GestureStateChangeEvent<PanGestureHandlerEventPayload>) => {
@@ -115,7 +114,6 @@ export default function Canvas({
     if (!isDrawingEnabled) return;
 
     scheduleOnRN(savePathCallback);
-    scheduleOnRN(onDrawEnd);
   }, [isDrawingEnabled, savePathCallback, onDrawEnd]);
 
   const panGesture = useMemo(

@@ -83,8 +83,9 @@ export default function DrawingScreen() {
 
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| `paths` | `PathData[]` | Yes | Array of path objects to render |
-| `savePath` | `(path: PathData) => void` | Yes | Callback function when a new path is drawn |
+| `paths` | `PathData[]` | No | Array of path objects to render |
+| `onDrawStart` | `() => void` | No | Callback function when drawing starts |
+| `onDrawEnd` | `(path: PathData) => void` | No | Callback function when drawing ends |
 | `isDrawingEnabled` | `boolean` | No | Whether drawing is enabled |
 | `isPathOptimized` | `boolean` | No | Whether path optimization is enabled |
 | `strokeColor` | `string` | No | Stroke color |
@@ -93,8 +94,6 @@ export default function DrawingScreen() {
 | `savedPathsProps` | `Omit<SavedPathsProps, "paths">` | No | Props for the saved paths |
 | `svgProps` | `SvgProps` | No | Props for the SVG |
 | `distanceThreshold` | `number` | No | Distance threshold for path optimization |
-| `onDrawStart` | `() => void` | No | Callback function when drawing starts |
-| `onDrawEnd` | `() => void` | No | Callback function when drawing ends |
 
 ## 🎨 Advanced Usage
 
