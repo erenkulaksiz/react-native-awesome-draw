@@ -7,12 +7,12 @@ export interface SavedPathsProps {
 }
 
 function SavedPaths({ paths, ...props }: SavedPathsProps) {
-  return paths.map((pathData, index) => (
+  return paths.map((path, index) => (
     <Path
       key={`p-${index}`}
-      d={pathData.p}
-      stroke={pathData.sc}
-      strokeWidth={pathData.sw}
+      d={path.p}
+      stroke={path.sc}
+      strokeWidth={path.sw}
       strokeLinejoin="round"
       strokeLinecap="round"
       fill="none"
