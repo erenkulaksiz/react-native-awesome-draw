@@ -67,17 +67,13 @@ export default function Index() {
       </View>
       <Canvas
         paths={paths}
-        // your custom path thing...
-        savePath={(path) => setPaths((prev) => [...prev, path])}
-        isDrawingEnabled={isDrawingEnabled}
-        isPathOptimized={isPathOptimized}
-        strokeWidth={strokeWidth}
         onDrawStart={() => {
           console.log("draw start");
         }}
-        onDrawEnd={() => {
-          console.log("draw end");
-        }}
+        onDrawEnd={(path) => setPaths((prev) => [...prev, path])}
+        isDrawingEnabled={isDrawingEnabled}
+        isPathOptimized={isPathOptimized}
+        strokeWidth={strokeWidth}
       />
     </View>
   );
