@@ -26,14 +26,22 @@
 
 ## 📦 Installation
 
-```bash
-npm install 
-```
-
 Quick start with Expo:
 
 ```bash
 npx expo install react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
+```
+
+With npm:
+
+```bash
+npm install react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
+```
+
+With yarn:
+
+```bash
+yarn add react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
 ```
 
 ## 🎯 Quick Start
