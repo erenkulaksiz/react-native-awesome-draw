@@ -1,80 +1,44 @@
-import { useState } from "react";
-import { View, Button, TouchableOpacity, Text } from "react-native";
-import { Canvas, type PathData } from "react-native-awesome-draw";
+import { useRouter } from "expo-router";
+import { Button, View, ScrollView, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
-  const { bottom, top } = useSafeAreaInsets();
-
-  const [paths, setPaths] = useState<PathData[]>([]);
-  const [isDrawingEnabled, setIsDrawingEnabled] = useState(true);
-  const [isPathOptimized, setIsPathOptimized] = useState(false);
-  const [strokeWidth, setStrokeWidth] = useState(8);
+  const { bottom } = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: top + 16,
-        paddingBottom: bottom + 16,
-      }}
-    >
-      <View style={{ gap: 10, padding: 16 }}>
+    <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.scrollViewContainer,
+          { paddingBottom: bottom + 16 },
+        ]}
+      >
         <Button
-          title={isDrawingEnabled ? "Disable Drawing" : "Enable Drawing"}
-          onPress={() => {
-            setIsDrawingEnabled((prev) => !prev);
-          }}
+          title="Basic Example"
+          onPress={() => router.push("/basicExample")}
+        />
+        <Button title="View Only" onPress={() => router.push("/viewOnly")} />
+        <Button
+          title="Animated Example"
+          onPress={() => router.push("/animation")}
         />
         <Button
-          title={
-            isPathOptimized
-              ? "Disable Path Optimization"
-              : "Enable Path Optimization"
-          }
-          onPress={() => {
-            setIsPathOptimized((prev) => !prev);
-          }}
+          title="Group Opacity"
+          onPress={() => router.push("/groupOpacity")}
         />
-        <Button
-          title="Clear"
-          onPress={() => {
-            setPaths([]);
-            console.log("paths cleared");
-          }}
-        />
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 10 }}>
-          {Array.from({ length: 14 }).map((_, index) => {
-            const item = (index + 1) * 2;
-
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setStrokeWidth(item)}
-              >
-                <Text
-                  style={{
-                    color: strokeWidth === item ? "black" : "gray",
-                    fontWeight: strokeWidth === item ? "bold" : "normal",
-                  }}
-                >
-                  {(index + 1) * 2}px
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </View>
-      <Canvas
-        paths={paths}
-        onDrawStart={() => {
-          console.log("draw start");
-        }}
-        onDrawEnd={(path) => setPaths((prev) => [...prev, path])}
-        isDrawingEnabled={isDrawingEnabled}
-        isPathOptimized={isPathOptimized}
-        strokeWidth={strokeWidth}
-      />
+      </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollViewContainer: {
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    gap: 16,
+  },
+});

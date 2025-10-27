@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { Fragment, useCallback, useMemo, type FC } from "react";
 import {
   Gesture,
   GestureDetector,
@@ -7,10 +7,10 @@ import {
 } from "react-native-gesture-handler";
 import { useAnimatedProps, useSharedValue } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
-import Svg from "react-native-svg";
+import Svg, { G } from "react-native-svg";
 import { SavedPaths, LivePath } from "../Path";
-import type { CanvasProps } from "./Canvas.types";
 import { pathToPoints, pointsToPath, simplifyPath } from "../../lib/math";
+import type { CanvasProps } from "./Canvas.types";
 
 export default function Canvas({
   paths,
@@ -24,11 +24,24 @@ export default function Canvas({
   onDrawStart = () => {},
   onDrawEnd = () => {},
   distanceThreshold: DISTANCE_THRESHOLD = 5,
+  isGroup = false,
+  groupProps,
 }: CanvasProps) {
   const currentPathString = useSharedValue("");
   const isDrawing = useSharedValue(false);
   const lastX = useSharedValue(0);
   const lastY = useSharedValue(0);
+
+  const GroupWrapper = useCallback(
+    ({ children }: { children: React.ReactNode }) => {
+      if (isGroup) {
+        return <G {...groupProps}>{children}</G>;
+      }
+
+      return <Fragment>{children}</Fragment>;
+    },
+    [isGroup, groupProps]
+  );
 
   const savedPaths = useMemo(() => {
     if (!paths) return null;
@@ -129,16 +142,18 @@ export default function Canvas({
   return (
     <GestureDetector gesture={panGesture}>
       <Svg width="100%" height="100%" {...svgProps}>
-        {savedPaths}
-        <LivePath
-          animatedProps={animatedProps}
-          stroke={strokeColor}
-          strokeWidth={strokeWidth}
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          fill="none"
-          {...livePathProps}
-        />
+        <GroupWrapper>
+          {savedPaths}
+          <LivePath
+            animatedProps={animatedProps}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            fill="none"
+            {...livePathProps}
+          />
+        </GroupWrapper>
       </Svg>
     </GestureDetector>
   );

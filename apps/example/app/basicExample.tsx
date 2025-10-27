@@ -1,0 +1,87 @@
+import { useState } from "react";
+import { View, Button, TouchableOpacity, Text } from "react-native";
+import { Canvas, type PathData } from "react-native-awesome-draw";
+
+/*
+  This example shows how to use the Canvas component with a basic drawing functionality.
+*/
+export default function BasicExample() {
+  const [paths, setPaths] = useState<PathData[]>([]);
+  const [isDrawingEnabled, setIsDrawingEnabled] = useState(true);
+  const [isPathOptimized, setIsPathOptimized] = useState(false);
+  const [strokeWidth, setStrokeWidth] = useState(8);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <View style={{ gap: 10, padding: 16 }}>
+        <Button
+          title={isDrawingEnabled ? "Disable Drawing" : "Enable Drawing"}
+          onPress={() => {
+            setIsDrawingEnabled((prev) => !prev);
+          }}
+        />
+        <Button
+          title={
+            isPathOptimized
+              ? "Disable Path Optimization"
+              : "Enable Path Optimization"
+          }
+          onPress={() => {
+            setIsPathOptimized((prev) => !prev);
+          }}
+        />
+        <Button
+          title="Clear"
+          onPress={() => {
+            setPaths([]);
+            console.log("paths cleared");
+          }}
+        />
+        <Button
+          title="Log Paths"
+          onPress={() => {
+            console.log(paths);
+          }}
+        />
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 10 }}>
+          {Array.from({ length: 14 }).map((_, index) => {
+            const item = (index + 1) * 2;
+
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => setStrokeWidth(item)}
+              >
+                <Text
+                  style={{
+                    color: strokeWidth === item ? "black" : "gray",
+                    fontWeight: strokeWidth === item ? "bold" : "normal",
+                  }}
+                >
+                  {(index + 1) * 2}px
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </View>
+      <Canvas
+        paths={paths}
+        onDrawStart={() => {
+          console.log("draw start");
+        }}
+        onDrawEnd={(path) => {
+          console.log("draw end");
+          setPaths((prev) => [...prev, path]);
+        }}
+        isDrawingEnabled={isDrawingEnabled}
+        isPathOptimized={isPathOptimized}
+        strokeWidth={strokeWidth}
+      />
+    </View>
+  );
+}

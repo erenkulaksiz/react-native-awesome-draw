@@ -26,14 +26,22 @@
 
 ## 📦 Installation
 
-```bash
-npm install 
-```
-
 Quick start with Expo:
 
 ```bash
 npx expo install react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
+```
+
+With npm:
+
+```bash
+npm install react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
+```
+
+With yarn:
+
+```bash
+yarn add react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
 ```
 
 ## 🎯 Quick Start
@@ -70,11 +78,13 @@ export default function Example() {
 | `onDrawEnd` | `(path: PathData) => void` | No | Callback function when drawing ends |
 | `isDrawingEnabled` | `boolean` | No | Whether drawing is enabled |
 | `isPathOptimized` | `boolean` | No | Whether path optimization is enabled |
+| `isGroup` | `boolean` | No | Whether to wrap the paths in a group |
+| `groupProps` | `GProps` | No | Props for the group wrapper |
 | `strokeColor` | `string` | No | Stroke color |
 | `strokeWidth` | `number` | No | Stroke width |
 | `livePathProps` | `Omit<PathProps, "animatedProps">` | No | Props for the live path |
 | `savedPathsProps` | `Omit<SavedPathsProps, "paths">` | No | Props for the saved paths |
-| `svgProps` | `SvgProps` | No | Props for the SVG |
+| `svgProps` | `SvgProps` | No | Props for the SVG container |
 | `distanceThreshold` | `number` | No | Distance threshold for path optimization |
 
 ## 🤝 Contributing
