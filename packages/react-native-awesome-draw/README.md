@@ -1,13 +1,9 @@
-# 🎨 react-native-awesome-draw
+# react-native-awesome-draw
 
 > A simple-yet-powerful drawing library for React Native, powered by react-native-reanimated for silky-smooth performance.
 
 [![npm version](https://img.shields.io/npm/v/react-native-awesome-draw.svg)](https://www.npmjs.com/package/react-native-awesome-draw)
 [![license](https://img.shields.io/npm/l/react-native-awesome-draw.svg)](https://github.com/yourusername/react-native-awesome-draw/blob/main/LICENSE)
-
-## ✨ Why react-native-awesome-draw?
-
-Created out of necessity when existing solutions fell short on performance and customization. This library brings together the best of both worlds: **blazing-fast performance** and **complete customization freedom**.
 
 ## 🚀 Key Features
 
@@ -31,27 +27,13 @@ Created out of necessity when existing solutions fell short on performance and c
 ## 📦 Installation
 
 ```bash
-npm install react-native-awesome-draw
+npm install 
 ```
 
-or with yarn:
+Quick start with Expo:
 
 ```bash
-yarn add react-native-awesome-draw
-```
-
-### Peer Dependencies
-
-Make sure you have the required peer dependencies installed:
-
-```bash
-npm install react-native-reanimated react-native-svg react-native-gesture-handler
-```
-
-With Expo:
-
-```bash
-npx expo install react-native-reanimated react-native-svg react-native-gesture-handler
+npx expo install react-native-awesome-draw react-native-reanimated react-native-svg react-native-gesture-handler
 ```
 
 ## 🎯 Quick Start
@@ -63,14 +45,14 @@ import { useState } from "react";
 import { View } from "react-native";
 import { Canvas, type PathData } from "react-native-awesome-draw";
 
-export default function DrawingScreen() {
+export default function Example() {
   const [paths, setPaths] = useState<PathData[]>([]);
 
   return (
     <View style={{ flex: 1 }}>
       <Canvas
         paths={paths}
-        savePath={(path) => setPaths((prev) => [...prev, path])}
+        onDrawEnd={(path) => setPaths((prev) => [...prev, path])}
       />
     </View>
   );
@@ -95,12 +77,6 @@ export default function DrawingScreen() {
 | `svgProps` | `SvgProps` | No | Props for the SVG |
 | `distanceThreshold` | `number` | No | Distance threshold for path optimization |
 
-## 🎨 Advanced Usage
-
-Coming soon! Check back for examples on:
-- Export to image
-- And more!
-
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
@@ -108,10 +84,6 @@ Contributions are welcome! Feel free to:
 - 🐛 Report bugs
 - 💡 Suggest new features
 - 🔧 Submit pull requests
-
-## ❓ Issues & Support
-
-Having trouble or want to request a feature?
 
 **[Open an issue →](https://github.com/erenkulaksiz/react-native-awesome-draw/issues/new)**
 
